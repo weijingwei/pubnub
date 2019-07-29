@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
+<script type="text/javascript">
+	var pubnubDemo = new PubNub({
+		publishKey : 'pub-c-a7c8512d-bc93-43c5-aae9-3e36c05dd76c',
+		subscribeKey : 'sub-c-dee8c902-9334-11e9-8277-da7aa9a31542',
+		secure : true,
+		secretKey : 'sec-c-NTc0Y2RjMmEtMzJhNi00NzY3LTllNWItMGE3ZDdkODYzNWUw'
+	});
+
+	pubnubDemo.addListener({
+		message : function(message) {
+			console.log(message)
+		}
+	})
+
+	pubnubDemo.subscribe({
+		channels : [ 'test FED channel' ]
+	});
+
+	function sendMessage() {
+		var messages = document.getElementById("message").value;
+		pubnubDemo.publish({
+			message : {
+				"content" : messages
+			},
+			channel : 'test BED channel'
+		});
+	}
+</script>
+</head>
+<body>
+	<input id="message">
+	<button onclick="sendMessage()">send</button>
+</body>
+</html>
