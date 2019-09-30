@@ -15,6 +15,10 @@ import com.pubnub.api.enums.PNStatusCategory;
 import com.pubnub.api.models.consumer.PNStatus;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+import com.pubnub.api.models.consumer.pubsub.PNSignalResult;
+import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
+import com.pubnub.api.models.consumer.pubsub.objects.PNSpaceResult;
+import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
 
 @WebListener
 public class PubNubListener implements ServletContextListener {
@@ -44,6 +48,30 @@ public class PubNubListener implements ServletContextListener {
                 // TODO Auto-generated method stub
                 
             }
+
+			@Override
+			public void signal(PubNub pubnub, PNSignalResult pnSignalResult) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void user(PubNub pubnub, PNUserResult pnUserResult) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void space(PubNub pubnub, PNSpaceResult pnSpaceResult) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void membership(PubNub pubnub, PNMembershipResult pnMembershipResult) {
+				// TODO Auto-generated method stub
+				
+			}
         });
 
         pubnub.subscribe().channels(Arrays.asList("test BED channel")).execute();
