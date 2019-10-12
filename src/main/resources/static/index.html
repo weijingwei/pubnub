@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>PubNub</title>
 <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.21.7.js"></script>
 <script type="text/javascript">
 	var pubnubDemo = new PubNub({
@@ -12,14 +12,27 @@
 		secretKey : 'sec-c-YzlmMGUwMjYtZDA1MC00N2ZmLWE3OWQtODQwZDQzYzZkMzdh'
 	});
 
-	pubnubDemo.addListener({
-		message : function(message) {
-			console.log(message)
-		}
-	})
+	var channels = [ 'test FED channel', '5d9021d25731a1218728273b' ];
+
+	pubnubDemo
+			.addListener({
+				message : function(message) {
+					console.log(message);
+					document.getElementById("messages").innerHTML = ("<pre style='white-space:pre-wrap; word-wrap:break-word'>"
+							+ JSON.stringify(message, null, 2) + "</pre><hr>" + document
+							.getElementById("messages").innerHTML);
+					if (message.message.actionType === "DASHBOARD_ADD") {
+						var dashboard = JSON.parse(message.message.currentData);
+						channels.push(dashboard.id);
+						pubnubDemo.subscribe({
+							channels : channels
+						});
+					}
+				}
+			});
 
 	pubnubDemo.subscribe({
-		channels : [ 'test FED channel' ]
+		channels : channels
 	});
 
 	function sendMessage() {
@@ -28,13 +41,15 @@
 			message : {
 				"content" : messages
 			},
-			channel : 'test BED channel'
+			channel : 'test FED channel'
 		});
 	}
 </script>
 </head>
 <body>
-	<input id="message">
+	<textarea id="message" style="width: 600px; height: 200px;"></textarea>
 	<button onclick="sendMessage()">send</button>
+	<hr>
+	<div id="messages"></div>
 </body>
 </html>
