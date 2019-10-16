@@ -12,11 +12,13 @@ import com.google.gson.JsonElement;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.callbacks.SubscribeCallback;
 import com.pubnub.api.models.consumer.PNStatus;
+import com.pubnub.api.models.consumer.message_actions.PNMessageAction;
 import com.pubnub.api.models.consumer.objects_api.space.PNSpace;
 import com.pubnub.api.models.consumer.objects_api.user.PNUser;
 import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
 import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
 import com.pubnub.api.models.consumer.pubsub.PNSignalResult;
+import com.pubnub.api.models.consumer.pubsub.message_actions.PNMessageActionResult;
 import com.pubnub.api.models.consumer.pubsub.objects.PNMembershipResult;
 import com.pubnub.api.models.consumer.pubsub.objects.PNSpaceResult;
 import com.pubnub.api.models.consumer.pubsub.objects.PNUserResult;
@@ -130,6 +132,21 @@ public class PubNubListener implements ServletContextListener {
 		        // . membership updated on a space
 		        JsonElement data = pnMembershipResult.getData(); // membership data for which the event applies to
 		        pnMembershipResult.getEvent(); // the event name
+			}
+
+			@Override
+			public void messageAction(PubNub arg0, PNMessageActionResult pnActionResult) {
+				PNMessageAction pnMessageAction = pnActionResult.getMessageAction();
+		        System.out.println("Message action type: " + pnMessageAction.getType());
+		        System.out.println("Message action value: " + pnMessageAction.getValue());
+		        System.out.println("Message action uuid: " + pnMessageAction.getUuid());
+		        System.out.println("Message action actionTimetoken: " + pnMessageAction.getActionTimetoken());
+		        System.out.println("Message action messageTimetoken: " + pnMessageAction.getMessageTimetoken());
+
+		        System.out.println("Message action subscription: " + pnActionResult.getSubscription());
+		        System.out.println("Message action channel: " + pnActionResult.getChannel());
+		        System.out.println("Message action timetoken: " + pnActionResult.getTimetoken());
+				
 			}
         });
 
