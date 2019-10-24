@@ -40,7 +40,7 @@ pre {
 		secretKey : 'sec-c-NzAwYzJiNWUtYjdhMS00YzA5LTk1OGEtYTU2MGRjN2NiYjcy'
 	}); */
 
-	var channels = [ 'test FED channel', '5d9021d25731a1218728273b' ];
+	var channels = [ 'test FED channel', '5d9021d25731a1218728273b', '5daecb05323722528fb1a3a1' ];
 
 	var index = 1;
 
@@ -96,24 +96,27 @@ pre {
 		document.getElementById("channels").innerHTML = JSON
 				.stringify(channels);
 	}
+	
+	function clean() {
+		document.getElementById("messages").innerHTML = "";
+		index = 1;
+	}
 </script>
 </head>
 <body>
-	<textarea id="message" style="width: 1200px; height: 200px;"></textarea>
+	<textarea id="message" style="width: 800px; height: 200px;"></textarea>
 	<button onclick="sendMessage()">send</button>
 	<div>
-		channels:
+		Subscribe channels:
 		<div id="channels" style="display: inline;"></div>
 	</div>
 	<input id="newChannel" style="width:200px;">
 	<button onclick="addChannel()">add channel</button>
 	<button onclick="removeChannel()">remove channel</button>
+	<button onclick="clean()">clean console</button>
 	<hr>
 	<div id="messages"></div>
 	<script type="text/javascript">
-		pubnubDemo.subscribe({
-			channels : channels
-		});
 		refreshChannels();
 	</script>
 </body>
