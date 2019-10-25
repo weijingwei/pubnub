@@ -26,19 +26,19 @@ pre {
 	};
 
 	// QA1 KEY
-	var pubnubDemo = new PubNub({
+	/* var pubnubDemo = new PubNub({
 		publishKey : 'pub-c-d1e3d8b6-968f-44bf-b37d-846124cb264c',
 		subscribeKey : 'sub-c-6fe595d2-aea8-11e9-9c97-16f61f10341e',
 		secure : true,
 		secretKey : 'sec-c-YzlmMGUwMjYtZDA1MC00N2ZmLWE3OWQtODQwZDQzYzZkMzdh'
-	});
+	}); */
 	// DEV3 KEY
-	/* var pubnubDemo = new PubNub({
+	var pubnubDemo = new PubNub({
 		publishKey : 'pub-c-5d03f3aa-e98e-4a4b-9f81-fc858b4ed108',
 		subscribeKey : 'sub-c-614114b6-aea8-11e9-a82a-4e2bb732e1b4',
 		secure : true,
 		secretKey : 'sec-c-NzAwYzJiNWUtYjdhMS00YzA5LTk1OGEtYTU2MGRjN2NiYjcy'
-	}); */
+	});
 
 	var channels = [ 'test FED channel', '5d9021d25731a1218728273b', '5daecb05323722528fb1a3a1' ];
 
@@ -108,7 +108,7 @@ pre {
 	<button onclick="sendMessage()">send</button>
 	<div>
 		Subscribe channels:
-		<div id="channels" style="display: inline;"></div>
+		<div id="channels" style="display: inline; word-break: break-all;"></div>
 	</div>
 	<input id="newChannel" style="width:200px;">
 	<button onclick="addChannel()">add channel</button>
