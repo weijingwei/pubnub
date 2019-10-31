@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>PubNub</title>
 <style type="text/css">
 pre {
@@ -40,7 +40,7 @@ pre {
 		secretKey : 'sec-c-NzAwYzJiNWUtYjdhMS00YzA5LTk1OGEtYTU2MGRjN2NiYjcy'
 	});
 
-	var channels = [ 'test FED channel', '5d9021d25731a1218728273b', '5daecb05323722528fb1a3a1' ];
+	var channels = [ 'test FED channel', '5d9021d25731a1218728273b', '5daecb05323722528fb1a3a1', '5daecb05323722528fb1a3a2' ];
 
 	var index = 1;
 
@@ -101,11 +101,34 @@ pre {
 		document.getElementById("messages").innerHTML = "";
 		index = 1;
 	}
+	
+	function decode() {
+		var xmlhttp;
+		if (window.XMLHttpRequest) {
+			//  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			// IE6, IE5 浏览器执行代码
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				document.getElementById("messages").innerHTML = (index++
+						+ "<pre>"
+						+ JSON.stringify(xmlhttp.responseText, null, 2)
+						+ "</pre><hr>" + document.getElementById("messages").innerHTML);
+			}
+		}
+		xmlhttp.open("POST", "pubnub/base64/decode", true);
+		xmlhttp.send(document.getElementById("base64").value);
+	}
 </script>
 </head>
 <body>
-	<textarea id="message" style="width: 800px; height: 200px;"></textarea>
+	<textarea id="message" style="width: 600px; height: 100px;"></textarea>
 	<button onclick="sendMessage()">send</button>
+	<textarea id="base64" style="width: 600px; height: 100px;"></textarea>
+	<button onclick="decode()">decode</button>
 	<div>
 		Subscribe channels:
 		<div id="channels" style="display: inline; word-break: break-all;"></div>

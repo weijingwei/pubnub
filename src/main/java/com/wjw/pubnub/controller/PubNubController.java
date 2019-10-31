@@ -1,5 +1,9 @@
 package com.wjw.pubnub.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.Base64;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
@@ -35,4 +39,10 @@ public class PubNubController {
             }
         });
     }
+    
+    @PostMapping(value = "/base64/decode", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String base64Decode(@RequestBody String message) throws UnsupportedEncodingException {
+        return URLDecoder.decode(new String(Base64.getDecoder().decode(message)), "UTF-8");
+    }
+    
 }
