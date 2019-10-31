@@ -7,7 +7,7 @@ ENV JAVA_EXTRA_OPTIONS=""
 
 RUN mkdir -p /opt/app /opt/app/conf /opt/app/logs
 
-RUN mvnw install
+RUN ./mvnw install
 
 COPY target/classes/application.properties /opt/app/conf/
 COPY target/*.jar /opt/app/app.jar
