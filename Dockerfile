@@ -31,6 +31,7 @@ RUN mvn install -f /tmp/pubnub
 RUN ls /tmp/pubnub/target
 RUN cp /tmp/pubnub/target/classes/application.properties /opt/app/conf/
 RUN cp /tmp/pubnub/target/*.jar /opt/app/app.jar
+RUN rm -rf /tmp/pubnub
 EXPOSE 8080
 WORKDIR /opt/app
 CMD exec java ${JAVA_HEAP_OPTIONS} ${JAVA_GC_OPTIONS} ${JAVA_EXTRA_OPTIONS} \
