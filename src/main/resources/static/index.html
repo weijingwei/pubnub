@@ -49,7 +49,7 @@ pre {
 				message : function(message) {
 					console.log(message);
 					document.getElementById("messages").innerHTML = (index++
-							+ "<pre>" + JSON.stringify(message, null, 2)
+							+ "<pre>" + JSON.stringify(JSON.parse(message), null, 2)
 							+ "</pre><hr>" + document
 							.getElementById("messages").innerHTML);
 					if (message.message.actionType === "DASHBOARD_ADD") {
@@ -115,7 +115,7 @@ pre {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 				document.getElementById("messages").innerHTML = (index++
 						+ "<pre>"
-						+ JSON.stringify(xmlhttp.responseText, null, 2)
+						+ JSON.stringify(JSON.parse(xmlhttp.responseText), null, 2)
 						+ "</pre><hr>" + document.getElementById("messages").innerHTML);
 			}
 		}
