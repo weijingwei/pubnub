@@ -49,7 +49,7 @@ pre {
 				message : function(message) {
 					console.log(message);
 					document.getElementById("messages").innerHTML = (index++
-							+ "<pre>" + JSON.stringify(JSON.parse(message), null, 2)
+							+ "<pre>" + JSON.stringify(message, null, 2)
 							+ "</pre><hr>" + document
 							.getElementById("messages").innerHTML);
 					if (message.message.actionType === "DASHBOARD_ADD") {
