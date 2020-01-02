@@ -8,6 +8,11 @@ RUN ls /tmp/pubnub/target
 RUN cp /tmp/pubnub/target/classes/application.properties /opt/app/conf/
 RUN cp /tmp/pubnub/target/*.jar /opt/app/app.jar
 RUN rm -rf /tmp/pubnub
+RUN rm -rf /usr/share/maven/ref/settings-docker.xml
+RUN rm -rf /usr/local/bin/mvn-entrypoint.sh
+RUN rm -rf /usr/bin/mvn
+RUN rm -rf /usr/share/maven
+
 EXPOSE 8080
 WORKDIR /opt/app
 CMD exec java ${JAVA_HEAP_OPTIONS} ${JAVA_GC_OPTIONS} ${JAVA_EXTRA_OPTIONS} \
