@@ -12,6 +12,7 @@ RUN rm -rf /usr/share/maven/ref/settings-docker.xml
 RUN rm -rf /usr/local/bin/mvn-entrypoint.sh
 RUN rm -rf /usr/bin/mvn
 RUN rm -rf /usr/share/maven
+RUN rm -rf ~/.m2
 
 EXPOSE 8080
 WORKDIR /opt/app
