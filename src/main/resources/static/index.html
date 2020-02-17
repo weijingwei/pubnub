@@ -32,6 +32,13 @@ pre {
 		secure : true,
 		secretKey : 'sec-c-YzlmMGUwMjYtZDA1MC00N2ZmLWE3OWQtODQwZDQzYzZkMzdh'
 	});
+	// QA2 KEY
+	var qa2pubnub = new PubNub({
+		publishKey : 'pub-c-d1e3d8b6-968f-44bf-b37d-846124cb264c',
+		subscribeKey : 'sub-c-6fe595d2-aea8-11e9-9c97-16f61f10341e',
+		secure : true,
+		secretKey : 'sec-c-YzlmMGUwMjYtZDA1MC00N2ZmLWE3OWQtODQwZDQzYzZkMzdh'
+	});
 	// DEV3 KEY
 	var dev3pubnub = new PubNub({
 		publishKey : 'pub-c-5d03f3aa-e98e-4a4b-9f81-fc858b4ed108',
@@ -44,52 +51,34 @@ pre {
 			'5dbfd6662a97355f41f57beb', '5dbfd6652a97355f41f57bdc' ];
 
 	var index = 1;
-
-	qa1pubnub
-			.addListener({
-				message : function(message) {
-					console.log(message);
-					document.getElementById("messages").innerHTML = (index++
-							+ "<pre>" + JSON.stringify(message, null, 2)
-							+ "</pre><hr>" + document
-							.getElementById("messages").innerHTML);
-					if (message.message.actionType === "DASHBOARD_ADD") {
-						var dashboard = JSON.parse(message.message.currentData);
-						channels.push(dashboard.id);
-						refreshChannels();
-					} else
-						(message.message.actionType === "DASHBOARD_DELETE")
-					{
-						var dashboardId = JSON
-								.parse(message.message.currentData);
-						channels.myRemove(dashboardId);
-						refreshChannels();
-					}
+	
+	var listener = {
+			message : function(message) {
+				console.log(message);
+				document.getElementById("messages").innerHTML = (index++
+						+ "<pre>" + JSON.stringify(message, null, 2)
+						+ "</pre><hr>" + document
+						.getElementById("messages").innerHTML);
+				if (message.message.actionType === "DASHBOARD_ADD") {
+					var dashboard = JSON.parse(message.message.currentData);
+					channels.push(dashboard.id);
+					refreshChannels();
+				} else
+					(message.message.actionType === "DASHBOARD_DELETE")
+				{
+					var dashboardId = JSON
+							.parse(message.message.currentData);
+					channels.myRemove(dashboardId);
+					refreshChannels();
 				}
-			});
+			}
+		};
 
-	dev3pubnub
-			.addListener({
-				message : function(message) {
-					console.log(message);
-					document.getElementById("messages").innerHTML = (index++
-							+ "<pre>" + JSON.stringify(message, null, 2)
-							+ "</pre><hr>" + document
-							.getElementById("messages").innerHTML);
-					if (message.message.actionType === "DASHBOARD_ADD") {
-						var dashboard = JSON.parse(message.message.currentData);
-						channels.push(dashboard.id);
-						refreshChannels();
-					} else
-						(message.message.actionType === "DASHBOARD_DELETE")
-					{
-						var dashboardId = JSON
-								.parse(message.message.currentData);
-						channels.myRemove(dashboardId);
-						refreshChannels();
-					}
-				}
-			});
+	qa1pubnub.addListener(listener);
+
+	dev3pubnub.addListener(listener);
+	
+	qa2pubnub.addListener(listener);
 
 	function sendMessage() {
 		var messages = document.getElementById("message").value;
