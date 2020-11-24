@@ -14,7 +14,7 @@ RUN rm -rf /usr/bin/mvn
 RUN rm -rf /usr/share/maven
 RUN rm -rf ~/.m2
 
-EXPOSE 8080
+EXPOSE 8089
 WORKDIR /opt/app
 CMD exec java ${JAVA_HEAP_OPTIONS} ${JAVA_GC_OPTIONS} ${JAVA_EXTRA_OPTIONS} \
         -Dlogging.path=/opt/app/logs \
